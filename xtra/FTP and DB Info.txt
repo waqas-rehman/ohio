@@ -1,0 +1,11 @@
+FTP 
+Host: ftp.waqastech.com
+username: pro@waqastech.com
+password: pro@1234
+
+Database
+
+Database Name: waqastec_proohio
+Host: localhost
+username: waqastec_proohio
+password: pro@12345
