@@ -45,8 +45,7 @@ $(function(){
 				</div>
                 
                 <div class="row">
-                	<label>Message</label>
-                    <div class="right"><textarea name="email_message" rows="" cols="" class="wysiwyg" style="height : 100px;"><?php echo set_value('email_message') ; ?></textarea></div>
+                	<textarea name="email_message" rows="" cols="" class="wysiwyg" style="height : 100px;"><?php echo set_value('email_message') ; ?></textarea>
 				</div>
                 
                 <div class="row">

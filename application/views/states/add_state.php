@@ -9,7 +9,7 @@ $(function(){
 	
     <div class="section">
     	<?php if($session_data["msg"]) { ?>
-			<?php if($session_data["msg"] == "1") { ?> <div class="message red"><ul><?php echo validation_errors(); ?></ul></div><?php } ?>
+			<?php if($session_data["msg"] == "1") { ?> <div class="message red"><span><ul><?php echo validation_errors(); ?></ul></span></div><?php } ?>
             <?php if($session_data["msg"] == "2") { ?> <div class="message red"><span><b>Error</b>: Failed to insert state record.</span></div> <?php } ?>
     	<?php } ?>
     </div>

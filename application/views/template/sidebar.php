@@ -44,26 +44,11 @@
 					<ul>
 						<li><h2>Toggle Menu</h2></li>
 						<li class="title">Toggle item 01</li>
-						<li class="content">
-							Aenean vulputate condime pellent
-							que. Sed ornare semper purus
-							sollicitudin. Vivamus nisi dui,
-							pharetra ac condimentum id.
-						</li>
+						<li class="content">Aeean vlputate condime pellent que. Sed ornare semper purus sollicitudin. Vivamus nisi dui, pharetra ac condimentum id.</li>
 						<li class="title">Toggle item 02</li>
-						<li class="content">
-							Aenean vulputate condime pellent
-							que. Sed ornare semper purus
-							sollicitudin. Vivamus nisi dui,
-							pharetra ac condimentum id.
-						</li>
+						<li class="content">Aenean vulputate condime pellent que. Sed ornare semper pus sollicitudin. Vivamus nisi dui, pharetra ac condimentum id.</li>
 						<li class="title">Toggle item 03</li>
-						<li class="content">
-							Aenean vulputate condime pellent
-							que. Sed ornare semper purus
-							sollicitudin. Vivamus nisi dui,
-							pharetra ac condimentum id.
-						</li>
+						<li class="content">Aenean vulputate condime pellent que. Sed ornare semper purus sollicitudin. Vivmus nisi dui, pharetra ac condientum id.</li>
 					</ul>
 				</div>
 			</div>

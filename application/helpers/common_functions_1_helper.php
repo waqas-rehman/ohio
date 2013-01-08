@@ -9,7 +9,7 @@ if ( ! function_exists('date_difference'))
 	}
 }
 
-if ( ! function_exists('get_states'))
+if ( ! function_exists('format_standard_grade'))
 {
 	function get_states()
 	{
@@ -219,5 +219,47 @@ if ( ! function_exists('test_function'))
 		echo get_root_path("dir") ;
 		echo "<br />" ;
 		echo get_image_path("dir") ;
+	}
+}
+
+if ( ! function_exists('post_function'))
+{
+	function post_function($form_elements)
+	{
+		$CI =& get_instance() ;
+		
+		if(is_array($form_elements))
+		{
+			if($form_elements)
+			{
+				foreach($form_elements as $rec => $val):
+					$param1[$rec] = mysql_real_escape_string($CI->input->post($val)) ;
+				endforeach ;
+			}
+			return $param1 ;
+		}
+		else
+			return mysql_real_escape_string($CI->input->post($form_elements)) ;
+	}
+}
+
+if ( ! function_exists('form_validation_function'))
+{
+	function form_validation_function($form_elements)
+	{
+		$CI =& get_instance() ;
+		$CI->load->library("form_validation") ;
+		
+		$CI->form_validation->set_error_delimiters("<li>", "</li>") ;
+		
+		foreach($form_elements as $rec => $val):
+			$res = explode("&", $val);
+			$CI->form_validation->set_rules($rec, $res[0], $res[1]) ;
+		endforeach ;
+	
+		if ($CI->form_validation->run() == FALSE)
+			return FALSE ;
+		else
+			return TRUE ;
 	}
 }

@@ -6,12 +6,12 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
 	<title>Pro Ohio System</title>
 	
-<style type="text/css">
+	<style type="text/css">
 		@import url("<?php echo base_url("css/style.css") ; ?>");
 		@import url("<?php echo base_url("css/forms.css") ; ?>");
 		@import url("<?php echo base_url("css/forms-btn.css") ; ?>");
 		@import url("<?php echo base_url("css/menu.css") ; ?>");
-		@import url("<?php echo base_url("css/style_text.css") ; ?>");
+		@import url('<?php echo base_url("css/style_text.css") ; ?>');
 		@import url("<?php echo base_url("css/datatables.css") ; ?>");
 		@import url("<?php echo base_url("css/fullcalendar.css") ; ?>");
 		@import url("<?php echo base_url("css/pirebox.css") ; ?>");
@@ -24,7 +24,7 @@
 		@import url("<?php echo base_url("css/wysiwyg.css") ; ?>");
 		@import url("<?php echo base_url("css/wysiwyg.modal.css") ; ?>");
 		@import url("<?php echo base_url("css/wysiwyg-editor.css") ; ?>");
-</style>
+	</style>
 	
 	<!--[if lte IE 8]>
 		<script type="text/javascript" src="js/excanvas.min.js"></script>
@@ -64,65 +64,41 @@
 
 <body>
 
-<div id="wrapper">
+<div id="wrapper" class="login">
 	
-    <div id="container">
-	
-		<div class="hide-btn top"></div>
-		<div class="hide-btn center"></div>
-		<div class="hide-btn bottom"></div>
+	<div class="box">
 		
-		<div id="top">
-			<h1 id="logo"><a href="./"></a></h1>
-			<div id="labels">
-				<ul>
-					<li><a href="<?php echo base_url("home") ; ?>" class="user"><span class="bar">Welcome Waqas</span></a></li>
-					<li><a href="<?php echo base_url("home") ; ?>" class="settings"></a></li>
-					<li class="subnav"><a href="<?php echo base_url("home") ; ?>" class="messages"></a>
-						<ul>
-							<li><a href="<?php echo base_url("home") ; ?>">New message</a></li>
-							<li><a href="<?php echo base_url("home") ; ?>">Inbox</a></li>
-							<li><a href="<?php echo base_url("home") ; ?>">Outbox</a></li>
-							<li><a href="<?php echo base_url("home") ; ?>">Trash</a></li>
-						</ul>
-					</li>
-					<li><a href="<?php echo base_url("home/logout") ; ?>" class="logout"></a></li>
-				</ul>
-			</div>
-			<div id="menu">
-				<ul> 
-					<li <?php if($session_data["menu"] == "dashboard") echo 'class="current"' ; ?>><a href="<?php echo base_url("dashboard") ; ?>">Dashboard</a></li>
-                    
-                    <li <?php if($session_data["top_menu"] == "test_management") echo 'class="current"' ; ?>><a href="javascript:void(0);">Test Management</a>
-                    	<ul>
-                        	<li <?php if($session_data["menu"] == "subjects") echo 'class="current"' ; ?>><a href="<?php echo base_url("subjects") ; ?>">Subjects</a>
-								<ul>
-                            		<li <?php if($session_data["submenu"] == "add_subject") echo 'class="current"' ; ?>><a href="<?php echo base_url("subjects/add_subject") ; ?>">Add Subject</a></li>
-								</ul>
-							</li>
-                            <li <?php if($session_data["menu"] == "standards") echo 'class="current"' ; ?>><a href="<?php echo base_url("standards") ; ?>">Standards</a>
-								<ul>
-									<li <?php if($session_data["submenu"] == "add_standard") echo 'class="current"' ; ?>><a href="<?php echo base_url("standards/add_standard") ; ?>">Add Standard</a></li>
-								</ul>
-							</li>
-                    	</ul>
-                	</li>
-                    
-                    <li <?php if($session_data["top_menu"] == "school_management") echo 'class="current"' ; ?>><a href="javascript:void(0);">School Management</a>
-						<ul>
-                        	<li <?php if($session_data["menu"] == "states") echo 'class="current"' ; ?>><a href="<?php echo base_url("states") ; ?>">States</a>
-                                <ul>
-                                    <li <?php if($session_data["submenu"] == "add_state") echo 'class="current"' ; ?>><a href="<?php echo base_url("states/add_state") ; ?>">Add State</a></li>
-                                </ul>
-							</li>
-                            <li <?php if($session_data["menu"] == "districts") echo 'class="current"' ; ?>><a href="<?php echo base_url("districts") ; ?>">Districts</a>
-								<ul>
-                                	<li <?php if($session_data["submenu"] == "add_district") echo 'class="current"' ; ?>><a href="<?php echo base_url("districts/add_district") ; ?>">Add District</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-                    
-                </ul>
-			</div>
+        <div class="title">Please login<span class="hide"></span></div>
+        
+		<div class="content">
+        		
+				<?php if($error == 1) { ?>
+					<div class="message inner red"><span><ul><?php echo validation_errors(); ?></ul></span></div>
+				<?php } if($error == 2) { ?>
+					<div class="message inner red"><span><b>Error</b>: User does not exist.</span></div>
+            	<?php } ?>
+            <form id="login_form" method="post" action="<?php echo base_url("home/login") ; ?>">
+				
+                <div class="row">
+					<label for="username">Username</label>
+					<div class="right"><input type="text" id="username" name="username" autocomplete="off" value="<?php echo set_value("username") ; ?>"/></div>
+				</div>
+                
+				<div class="row">
+					<label for="password">Password</label>
+					<div class="right"><input type="password" id="password" name="password" value="" /></div>
+				</div>
+                
+				<div class="row">
+					<div class="right"><button type="submit"><span>Login</span></button></div>
+				</div>
+			
+            </form>
 		</div>
+	</div>
+	
+</div>
+
+</body>
+
+</html> 

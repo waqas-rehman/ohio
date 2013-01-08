@@ -9,9 +9,7 @@ $(function(){
 	<div class="section">
     	<div class="box">
         	<div class="title">View District Record<span class="hide"></span></div>
-			<!--
-            /* district_id 	district_name 	district_code 	state_id 	district_contact_first_name 	district_contact_last_name 	district_admin_password 	district_contact_email 	district_status /**/
-            -->
+			
             <div class="content">
             	<div class="row">
 					<label for="district_name">District Name</label>

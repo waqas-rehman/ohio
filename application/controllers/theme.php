@@ -1,15 +1,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed') ;
 
 class Theme extends CI_Controller
-{	
-	public function dashboard()
-	{
-		$this->load->view('theme/dashboard') ;
-	}
+{
+	public function __construct()
+    {
+    	parent::__construct();
+        if($this->session->userdata('logged_in') != TRUE)
+			redirect(base_url("home")) ;
+    }
 	
 	public function index()
 	{
 		$this->load->view("theme/index") ;
+	}
+		
+	public function dashboard()
+	{
+		$this->load->view('theme/dashboard') ;
 	}
 	
 	public function boxgrid()
