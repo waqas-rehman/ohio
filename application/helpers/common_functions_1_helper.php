@@ -154,6 +154,41 @@ if( ! function_exists('upload_file'))
 		if (!($CI1->upload->do_upload($file_name)))
 		{
 			$response["result"] = false ;
+			$CI1->upload->display_errors('<li>', '</li>') ;
+			$response["errors"] = $CI1->upload->display_errors() ;
+		}
+		else
+		{
+			$file_data = $CI1->upload->data() ;
+			$response["result"] = true ;
+			$response["encripted_file_name"] = $file_data["file_name"] ; 
+			$response["original_file_name"] = $file_data["orig_name"] ;
+			$response["file_extention"] = $file_data["file_ext"] ;
+		}
+		
+		return $response ;
+	}
+}
+
+if( ! function_exists('upload_image'))
+{
+	function upload_image($file_name, $file_destination)
+	{
+		$config['upload_path'] = "./".$file_destination."/" ;
+		$config['allowed_types'] = "tif|tiff|gif|jpeg|jpg|jif|jfif|jp2|jpx|j2k|j2c|fpx|pcd|png|pdf" ;
+		$config['max_size']	= '10240' ;
+		$config['encrypt_name']	= TRUE ;
+		$config['remove_spaces']	= TRUE ;
+		
+		$CI1 =& get_instance() ;
+		$CI1->load->library('upload', $config) ;
+		
+		$response = array() ;
+			
+		if (!($CI1->upload->do_upload($file_name)))
+		{
+			$response["result"] = false ;
+			$CI1->upload->display_errors('<li>', '</li>') ;
 			$response["errors"] = $CI1->upload->display_errors() ;
 		}
 		else
@@ -261,5 +296,21 @@ if ( ! function_exists('form_validation_function'))
 			return FALSE ;
 		else
 			return TRUE ;
+	}
+}
+
+if ( ! function_exists('array_to_string'))
+{
+	function array_to_string($array, $separater)
+	{
+		return implode($separater, $array) ;
+	}
+}
+
+if ( ! function_exists('string_to_array'))
+{
+	function string_to_array($string, $separater)
+	{
+		return explode($separater, $string) ;
 	}
 }

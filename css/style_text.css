@@ -61,10 +61,14 @@ p {
 	display : inline-block;
 	border : 1px solid #E5E5E5;
 	border-left : 4px solid #E5E5E5;
-	padding : 10px 15px;
+	border-right : 4px solid #E5E5E5;
+	border-top : 4px solid #E5E5E5;
+	border-bottom : 4px solid #E5E5E5;
+	padding : 10px 5px;
 	margin : 15px 0 0 0;
-	font : italic 14px/19px Times New Roman;
-	text-align : center;
+	font : normal 14px/19px Times New Roman;
+	width:98%;
+	/* text-align : center; /**/
 }
 
 #right .box .content pre {

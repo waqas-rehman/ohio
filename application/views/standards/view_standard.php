@@ -12,17 +12,17 @@ $(function(){
             
             <div class="content">
             	<div class="row">
-					<label for="standard_subject">Standard Subject</label>
+					<label for="standard_subject">Subject</label>
 					<div class="right"><input type="text" name="standard_subject" value="<?php echo $standard_rec->subject_name ; ?>" disabled="disabled" maxlength="" /></div>
 				</div>
 				
                 <div class="row">
-					<label for="standard_grade">Standard Grade</label>
+					<label for="standard_grade">Grade</label>
 					<div class="right"><input type="text" name="standard_grade" value="<?php echo $standard_rec->standard_grade ; ?>" disabled="disabled" maxlength="" /></div>
 				</div>
 				
                 <div class="row">
-                	<label for="standard_pc_domain_code">Pro-Core Domain Code</label>
+                	<label for="standard_pc_domain_code">Domain</label>
 					<div class="right"><input type="text" name="standard_pc_domain_code" value="<?php echo $standard_rec->standard_pc_domain_code ; ?>" disabled="disabled" maxlength="" /></div><br />
 				</div>
                 
@@ -32,12 +32,12 @@ $(function(){
 				</div>
                 
                 <div class="row">
-                	<label for="standard_pc_standard_number">Pro-Core Standard Number</label>
+                	<label for="standard_pc_standard_number">Standard Number</label>
 					<div class="right"><input type="text" name="standard_pc_standard_number" value="<?php echo $standard_rec->standard_pc_standard_number ; ?>" disabled="disabled" maxlength="" /></div><br />
 				</div>
                 
                 <div class="row">
-                	<label for="standard_learning_standard_description">Learning Standard Description</label>
+                	<label for="standard_learning_standard_description">Standard Description</label>
 					<div class="right"><input type="text" name="standard_learning_standard_description" value="<?php echo $standard_rec->standard_learning_standard_description ; ?>" disabled="disabled"  maxlength="" /></div><br />
 				</div>
                 

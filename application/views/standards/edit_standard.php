@@ -23,7 +23,7 @@ $(function(){
                     <input type="hidden" name="standard_id" value="<?php echo encoded_string($standard_rec->standard_id, "&", 10) ; ?>"  />
                     
                      <div class="row">
-                    	<label for="standard_subject">Standard Subject</label>
+                    	<label for="standard_subject">Subject</label>
 						<div class="right">
 							<select id="standard_subject" name="standard_subject" class="big">
                             	<option value="">Choose Standard Subject</option>
@@ -40,7 +40,7 @@ $(function(){
 					</div>
 					
                     <div class="row">
-                    	<label for="standard_grade">Standard Grade</label>
+                    	<label for="standard_grade">Grade</label>
 						<div class="right">
 							<select id="standard_grade" name="standard_grade" class="big">
 								<option value="">Choose Standard Grade</option>
@@ -61,7 +61,7 @@ $(function(){
 					</div>
                     
                     <div class="row">
-						<label for="standard_pc_domain_code">Pro-Core Domain Code</label>
+						<label for="standard_pc_domain_code">Domain</label>
 						<div class="right"><input type="text" name="standard_pc_domain_code" value="<?php echo set_value("standard_pc_domain_code", $standard_rec->standard_pc_domain_code) ; ?>" maxlength="15" /></div><br />
 					</div>
                     
@@ -71,12 +71,12 @@ $(function(){
 					</div>
                     
                     <div class="row">
-						<label for="standard_pc_standard_number">Pro-Core Standard Number</label>
+						<label for="standard_pc_standard_number">Standard Number</label>
 						<div class="right"><input type="text" name="standard_pc_standard_number" value="<?php echo set_value("standard_pc_standard_number", $standard_rec->standard_pc_standard_number) ; ?>" maxlength="15" /></div><br />
 					</div>
                     
                     <div class="row">
-						<label for="standard_learning_standard_description">Learning Standard Description</label>
+						<label for="standard_learning_standard_description">Standard Description</label>
 						<div class="right"><input type="text" name="standard_learning_standard_description" value="<?php echo set_value("standard_learning_standard_description", $standard_rec->standard_learning_standard_description) ; ?>" maxlength="105" /></div><br />
 					</div>
 					

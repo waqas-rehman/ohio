@@ -11,8 +11,6 @@ class Dashboard extends CI_Controller
 		
 	public function index()
 	{
-		print_r($this->session->all_userdata()) ;
-		exit ;
 		$data["view"] = "dashboard/index" ;
 		$data["session_data"] = $this->session_data("", 0) ;
 		$this->load->view("template/body", $data) ;

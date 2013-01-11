@@ -38,7 +38,7 @@
                                         	<img title="Edit Record" src="<?php echo base_url("gfx/icons/small/edit.png") ; ?>" alt="Edit" />
                                         </a>
                                         &nbsp;&nbsp;
-                                    	<a href="<?php echo base_url("subjects/remove_subject/".encoded_string($recs->subject_id, "&", 10)) ; ?>" class="item small" onclick="javascript:confirm('Are you sure to remove this record?')">
+                                    	<a href="<?php echo base_url("subjects/remove_subject/".encoded_string($recs->subject_id, "&", 10)) ; ?>" class="item small" onclick="return confirm('Are you sure to remove this record?')">
                                         	<img title="Remove Record" src="<?php echo base_url("gfx/icons/big/trash.png") ; ?>" alt="Cancel" />
                                         </a>
                                     </td>

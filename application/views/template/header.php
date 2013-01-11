@@ -105,6 +105,11 @@
 									<li <?php if($session_data["submenu"] == "add_standard") echo 'class="current"' ; ?>><a href="<?php echo base_url("standards/add_standard") ; ?>">Add Standard</a></li>
 								</ul>
 							</li>
+                            <li <?php if($session_data["menu"] == "questions") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions") ; ?>">Questions</a>
+								<ul>
+									<li <?php if($session_data["submenu"] == "add_question") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions/choose_question_type") ; ?>">Add Question</a></li>
+								</ul>
+							</li>
                     	</ul>
                 	</li>
                     

@@ -131,7 +131,7 @@ class Standards extends CI_Controller
 													 "standard_learning_standard_description" => "standard_learning_standard_description",
 													 "standard_status" => "standard_status")) ;
 				
-				$cond1["standard_id"] = decoded_string($this->single_post_function("standard_id"), "&") ;
+				$cond1["standard_id"] = decoded_string(post_function("standard_id"), "&") ;
 				
 				$res = $this->model1->update_rec($param1, $cond1, "standards") ;
 				
