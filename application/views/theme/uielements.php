@@ -207,7 +207,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
+                            <div class="row">
 								<label>Range slider</label>
 								<div class="right">
 									<div class="slider range-slide">

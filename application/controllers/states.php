@@ -12,8 +12,8 @@ class States extends CI_Controller
 	public function index($msg = 0)
 	{
 		$data["state_recs"] = $this->model1->get_all("states") ;
-		
-		$data["view"] = "states/index" ;
+		print_r($data["state_recs"]) ; exit ;
+ 		$data["view"] = "states/index" ;
 		$data["session_data"] = $this->session_data("", $msg) ;
 		$this->load->view("template/body", $data);
 	}

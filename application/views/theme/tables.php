@@ -192,10 +192,7 @@
 			
 			<div class="section">
 				<div class="box">
-					<div class="title">
-						Table with all options
-						<span class="hide"></span>
-					</div>
+					<div class="title">Table with all options<span class="hide"></span></div>
 					<div class="content">
 						<table cellspacing="0" cellpadding="0" border="0" class="all"> 
 							<thead> 
@@ -395,10 +392,7 @@
 			
 			<div class="section">
 				<div class="box">
-					<div class="title">
-						Table with paging and sorting
-						<span class="hide"></span>
-					</div>
+					<div class="title">Table with paging and sorting<span class="hide"></span></div>
 					<div class="content">
 						<table cellspacing="0" cellpadding="0" border="0" class="pagesort"> 
 							<thead> 
@@ -478,10 +472,7 @@
 			
 			<div class="section">
 				<div class="box">
-					<div class="title">
-						Table with sorting and search
-						<span class="hide"></span>
-					</div>
+					<div class="title">Table with sorting and search<span class="hide"></span></div>
 					<div class="content">
 						<table cellspacing="0" cellpadding="0" border="0" class="sortsearch"> 
 							<thead> 
@@ -561,10 +552,7 @@
 			
 			<div class="section">
 				<div class="box">
-					<div class="title">
-						Table with sorting
-						<span class="hide"></span>
-					</div>
+					<div class="title">Table with sorting<span class="hide"></span></div>
 					<div class="content">
 						<table cellspacing="0" cellpadding="0" border="0" class="sorting"> 
 							<thead> 
@@ -644,10 +632,7 @@
 			
 			<div class="section">
 				<div class="box">
-					<div class="title">
-						Table as normal
-						<span class="hide"></span>
-					</div>
+					<div class="title">Table as normal<span class="hide"></span></div>
 					<div class="content">
 						<table cellspacing="0" cellpadding="0" border="0"> 
 							<thead> 

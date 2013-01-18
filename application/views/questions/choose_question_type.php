@@ -77,6 +77,21 @@ $(function(){ $(".cancel_button").click(function(){ window.location.href = "<?ph
                             <label for="radio-12">Multiple Answer Question (Checkboxes)</label>
                         </div>
                     </div>
+                    
+                    <div class="right">
+                    	<div class="custom-radio">
+                        	<input type="radio" id="radio-13" name="answer_type" value="large_text_box" <?php if($answer_type == "large_text_box") echo set_radio('answer_type', 'large_text_box', true) ; else echo set_radio('answer_type', 'large_text_box') ; ?> />
+                            <label for="radio-13">Large Text Box</label>
+                        </div>
+                    </div>
+                    
+                    <div class="right">
+                    	<div class="custom-radio">
+                        	<input type="radio" id="radio-14" name="answer_type" value="small_text_box" <?php if($answer_type == "small_text_box") echo set_radio('answer_type', 'small_text_box', true) ; else echo set_radio('answer_type', 'small_text_box') ; ?> />
+                            <label for="radio-14">Small Text Box</label>
+                        </div>
+                    </div>
+                
                 </div>
                 
                 <div class="row">

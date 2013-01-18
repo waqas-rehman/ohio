@@ -62,29 +62,3 @@
 				</div>
 	</div>
 </div>
-
-<?php
-	function print_question_type($question_type)
-	{
-		if($question_type > 0)
-			echo "MCQ" ;
-		
-		else
-			echo "Text" ;
-	}
-	
-	function print_answer_type($answer_type)
-	{
-		if($answer_type == "single_answer")
-			echo "Single Answer" ;
-		
-		elseif($answer_type == "multiple_answer")
-			echo "Multiple Answers" ;
-		
-		elseif($answer_type == "large_text_box") 
-			echo "Large Text Box" ;
-		
-		elseif($answer_type == "small_text_box")
-			echo "Small Text Box" ;
-	}
-?>

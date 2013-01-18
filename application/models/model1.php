@@ -331,6 +331,71 @@ class Model1 extends CI_Model
 	}
 	
 	/****** INNER JOIN with conds and Limit *******/
+	public function inner_join_multiple($attribute1, $attribute2, $cond1, $cond2, $join_cond_1, $join_cond_2, $tablename1, $tablename2)
+	{
+		$i = 0 ;
+		$conditions = "" ;
+		if($cond1)
+		{
+			foreach($cond1 as $key1 => $value1):
+				$value1 = mysql_real_escape_string($value1) ;
+				if($i > 0) $conditions .= " AND " ;
+				$conditions .= $tablename1.".".$key1." = '".$value1."' " ;
+				$i++ ;
+			endforeach ;
+		}
+		
+		if($cond2)
+		{
+			foreach($cond2 as $key2 => $value2):
+				$value2 = mysql_real_escape_string($value2) ;
+				if($i > 0) $conditions .= " AND " ;
+				$conditions .= $tablename2.".".$key2." = '".$value2."' " ;
+				$i++ ;
+			endforeach ;
+		}
+		
+		if($conditions == "") $conditions = "1" ;
+		
+		$j = 0 ;
+		$attributes = "*" ;
+		if($attribute1)
+		{
+			$attributes = "" ;
+			foreach($attribute1 as $key3):
+				$key3 = mysql_real_escape_string($key3) ;
+				if($j > 0) $attributes .= ", " ;
+				$attributes .= $tablename1.".".$key3 ;
+				$j++ ;
+			endforeach ;
+		}
+		
+		if($attribute2)
+		{
+			if(!(is_array($attribute1)))
+				$attributes = "" ;
+			foreach($attribute2 as $key4):
+				$key4 = mysql_real_escape_string($key4) ;
+				if($j > 0) $attributes .= ", " ;
+				$attributes .= $tablename2.".".$key4 ;
+				$j++ ;
+			endforeach ;
+		}
+		
+		$q = "SELECT ".$attributes." FROM ".$tablename1." INNER JOIN ".$tablename2." ON ".$tablename1.".".$join_cond_1." = ".$tablename2.".".$join_cond_2." WHERE ".$conditions ;
+	
+		$query = $this->db->query($q) ;
+		if ($query->num_rows() > 0)
+		{
+			foreach ($query->result() as $row)
+				$data[] =  $row ;
+			return $data ;
+		}
+		else 
+			 return 0 ;
+	}
+	
+	/****** INNER JOIN with conds and Limit *******/
 	public function inner_join_limit($attribute1, $attribute2, $cond1, $cond2, $join_cond_1, $join_cond_2, $tablename1, $tablename2, $offset = "0", $limit = "ALL")
 	{
 		$i = 0 ;

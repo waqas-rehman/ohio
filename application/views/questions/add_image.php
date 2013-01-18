@@ -19,17 +19,26 @@ $(function(){
         	<div class="title">Upload Question Image<span class="hide"></span></div>
 			
             <div class="content">
-                
-                <form id="district_form" action="<?php echo base_url("questions/upload_image") ; ?>" method="post" enctype="multipart/form-data">
-                
+                <?php if($session_data["msg"] == "5") { ?>
+               		<form id="district_form" action="<?php echo base_url("questions/upload_image") ; ?>" method="post" enctype="multipart/form-data">
+                		<?php if($question_rec->question_image != "") { ?>
+                        	<a href="<?php echo base_url("question_images/".$question_rec->question_image) ; ?>" target="_blank">Click Here to View Current File</a>
+							<input type="hidden" id="image_exits" name="image_exists" value="yes" />
+						<?php } ?>
+                        
+				<?php } else { ?>
+                	<form id="district_form" action="<?php echo base_url("questions/upload_image") ; ?>" method="post" enctype="multipart/form-data">
+                    	<input type="hidden" id="image_exits" name="image_exists" value="no" />
+                <?php } ?>
                 <input type="hidden" id="question_id" name="question_id" value="<?php echo encoded_string($question_rec->question_id, "&", 10) ; ?>" />
-      
+                
+                
                 <div class="row">
 					<label for="image_file">Image File</label>
 					<div class="right"><input type="file" id="image_file" name="image_file" /></div>
 				</div>
       			
-                <div class="row"><div class="right"><button type="submit"><span>Add</span></button></div></div>
+                <div class="row"><div class="right"><button type="submit"><span>Upload</span></button></div></div>
 				
                 </form>
 			</div>

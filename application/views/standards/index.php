@@ -33,7 +33,7 @@
 							<tbody>
                             	<?php foreach($standard_recs as $recs): ?>
 								<tr>
-									<td align="center" valign="middle"><?php echo $recs->standard_subject ; ?></td>
+									<td align="center" valign="middle"><?php echo $recs->subject_name ; ?></td>
 									<td align="center" valign="middle"><?php echo $recs->standard_grade ; ?></td>
                               		<td align="center" valign="middle"><?php echo $recs->standard_pc_domain_code ; ?></td>
                                     <td align="center" valign="middle"><?php echo $recs->standard_pc_standard_number ; ?></td>

@@ -11,7 +11,8 @@ class Standards extends CI_Controller
 	
 	public function index($msg = 0)
 	{
-		$data["standard_recs"] = $this->model1->get_all("standards") ;
+		$data["standard_recs"] = $this->model1->inner_join_multiple(array("standard_id", "standard_subject", "standard_grade", "standard_pc_domain_code", "standard_domain_description", "standard_pc_standard_number", "standard_learning_standard_description", "standard_status"), array("subject_id", "subject_name","subject_status"), "", array("subject_status" => "Active"), "standard_subject", "subject_id", "standards", "subjects") ;
+		
 		
 		$data["view"] = "standards/index" ;
 		$data["session_data"] = $this->session_data("", $msg) ;

@@ -253,9 +253,7 @@
 							</div>
 							<div class="row">
 								<label>Buttons</label>
-								<div class="right">
-									<button type="submit"><span>Click me</span></button>
-								</div>
+								<div class="right"><button type="submit"><span>Click me</span></button></div>
 							</div>
 						</form>
 					</div>
@@ -460,7 +458,7 @@
 					</div>
 					<div class="content nopadding">
 						<form action="">
-								<textarea rows="" cols="" class="wysiwyg" style="height : 100px;"></textarea>
+								<textarea rows="" cols="" class="wysiwyg" style="height : 100px;">working</textarea>
 						</form>
 					</div>
 				</div>

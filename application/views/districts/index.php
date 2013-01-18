@@ -9,6 +9,9 @@
 			<?php if($session_data["msg"] == "3") { ?> <div class="message green"><span><b>Succes</b>: District record removed successfully.</span></div> <?php } ?>
 			<?php if($session_data["msg"] == "4") { ?> <div class="message red"><span><b>Error</b>: Failed to remove district record.</span></div> <?php } ?>
             
+            <?php if($session_data["msg"] == "5") { ?> <div class="message green"><span><b>Succes</b>: Email sent successfully.</span></div> <?php } ?>
+			<?php if($session_data["msg"] == "6") { ?> <div class="message red"><span><b>Error</b>: Failed to send email.</span></div> <?php } ?>
+            
 		<?php } ?>
     </div>
     

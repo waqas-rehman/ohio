@@ -24,6 +24,7 @@
 		@import url("<?php echo base_url("css/wysiwyg.css") ; ?>");
 		@import url("<?php echo base_url("css/wysiwyg.modal.css") ; ?>");
 		@import url("<?php echo base_url("css/wysiwyg-editor.css") ; ?>");
+		@import url("<?php echo base_url("css/custom-css.css") ; ?>");
 </style>
 	
 	<!--[if lte IE 8]>
@@ -105,11 +106,18 @@
 									<li <?php if($session_data["submenu"] == "add_standard") echo 'class="current"' ; ?>><a href="<?php echo base_url("standards/add_standard") ; ?>">Add Standard</a></li>
 								</ul>
 							</li>
-                            <li <?php if($session_data["menu"] == "questions") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions") ; ?>">Questions</a>
+                            <li <?php if($session_data["menu"] == "questions") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions") ; ?>">MCQs/Text Questions</a>
 								<ul>
-									<li <?php if($session_data["submenu"] == "add_question") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions/choose_question_type") ; ?>">Add Question</a></li>
+									<li <?php if($session_data["submenu"] == "add_question") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions/choose_question_type") ; ?>">Add MCQ/Text Question</a></li>
 								</ul>
 							</li>
+                            
+                            <li <?php if($session_data["menu"] == "questions_mtc") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions_mtc") ; ?>">Match the Col. Questions</a>
+								<ul>
+									<li <?php if($session_data["submenu"] == "add_mtc_question") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions_mtc/add_question") ; ?>">Add Match the Col. Question</a></li>
+								</ul>
+							</li>
+                            
                     	</ul>
                 	</li>
                     

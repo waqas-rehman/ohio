@@ -63,13 +63,15 @@ $(function(){
 					<div class="right"><textarea id="question_statement" name="question_statement" rows="" cols="" class="wysiwyg" style="height : 100px;"><?php echo set_value('question_statement') ; ?></textarea></div>
 				</div>
 				
-                <?php for($i = 1 ; $i <= $number_of_choices ; $i++) { ?>
+                <?php if($number_of_choices) {
+						for($i = 1 ; $i <= $number_of_choices ; $i++) { ?>
                 	<div class="row">
 						<label for="choice<?=$i?>">Choice <?=$i?> Text</label>
 						<div class="right"><input type="text" name="choice<?=$i?>" value="<?php echo set_value('choice'.$i) ; ?>" /></div>
 					</div>
-				<?php } ?>
+				<?php } } ?>
                 
+                <?php if($answer_type == "single_answer" || $answer_type == "multiple_answer") { ?>
                 <div class="row">
                 	<label>Correct Answer</label>
 					<div class="right">
@@ -84,7 +86,8 @@ $(function(){
                         <?php } ?>            
                     </div>
                 </div>
-							
+				<?php } ?>
+                			
                 <div class="row"><div class="right"><button type="submit"><span>Add</span></button>&nbsp;&nbsp;<button type="button" class="back_button"><span>Back</span></button>&nbsp;&nbsp;<button type="button" class="cancel_button"><span>Cancel</span></button></div></div>
 				
                 </form>

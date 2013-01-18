@@ -93,7 +93,6 @@ class Districts extends CI_Controller
 			}
 			else
 			{
-				//$param["district_id"] = decoded_string(post_function("district_id"), "&") ;
 				$param = post_function(array("email_address" => "email_address",
 											 "email_cc" => "email_cc",
 											 "email_bcc" => "email_bcc",
@@ -109,13 +108,16 @@ class Districts extends CI_Controller
 				{
 					rename(get_root_path("email_attachments").$response["encripted_file_name"], get_root_path("email_attachments").$response["original_file_name"]) ;
 					
-					$email_flag = send_message("Registration", $param["email_address"], $param["email_cc"], $param["email_bcc"], $param["email_subject"], $param["email_message"], $response["encripted_file_name"], $response["original_file_name"], $response["file_extention"], "email_attachments") ;
+					$email_flag = send_message("ProCore", $param["email_address"], $param["email_cc"], $param["email_bcc"], $param["email_subject"], $param["email_message"], $response["encripted_file_name"], $response["original_file_name"], $response["file_extention"], "email_attachments") ;
 					
 					rename(get_root_path("email_attachments").$response["original_file_name"], get_root_path("email_attachments").$response["encripted_file_name"]) ;
 					unlink(get_root_path("email_attachments").$response["encripted_file_name"]) ;
 				}
 				else
-					$email_flag = send_email_message("Registration", $param["email_address"], $param["email_cc"], $param["email_bcc"], $param["email_subject"], $param["email_message"], 0, "email_attachments") ;
+					$email_flag = send_email_message("ProCore", $param["email_address"], $param["email_cc"], $param["email_bcc"], $param["email_subject"], $param["email_message"], 0, "email_attachments") ;
+					
+					if($email_flag) redirect(base_url("districts/index/5")) ;
+					else redirect(base_url("districts/index/6")) ;
 			}
 		}
 		else
