@@ -7,11 +7,12 @@ $(function(){
 <div id="right">
 	
     <div class="section">
-    	<?php if($answer) { ?>
-			<div class="message green"><span><b>Succes</b>: Your answer is correct.</span></div>
-        <?php } else { ?>
-        	<div class="message red"><span><b>Error</b>: Your answer is not correct.</span></div>
-        <?php } ?>
+    	<?php if($answer_type == "single_answer" || $answer_type == "multiple_answer") { ?>
+			<?php if($answer) { ?> <div class="message green"><span><b>Succes</b>: Your answer is correct.</span></div>
+            <?php } else { ?> <div class="message red"><span><b>Error</b>: Your answer is not correct.</span></div><?php } ?>
+    	<?php } else { ?>
+        	<div class="message green"><span><b>Succes</b>: Your answer is <b><?php echo $text_answer ; ?></b>.</span></div>
+		<?php } ?>
     </div>
     
     <div class="section">

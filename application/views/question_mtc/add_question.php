@@ -1,11 +1,7 @@
+<?php $this->load->view("text_editor/tiny_mce") ; ?>
 <script type="application/javascript">
 $(function(){
-	$(".back_button").click(function(){
-		var question_type = $("#question_type").val(), number_of_choices = $("#number_of_choices").val(), answer_type = $("#answer_type").val() ;
-		var url = "<?php echo base_url("questions/choose_question_type") ; ?>"+"/"+question_type+"/"+number_of_choices+"/"+answer_type+"/0" ;
-		window.location.href =  url ;
-	}) ;
-	$(".cancel_button").click(function(){ window.location.href = "<?php echo base_url("questions") ; ?>"; }) ;
+	$(".cancel_button").click(function(){ window.location.href = "<?php echo base_url("questions_mtc") ; ?>"; }) ;
 }) ;
 </script>
 <style type="text/css">
@@ -24,9 +20,7 @@ $(function(){
         	<div class="title">Add Question<span class="hide"></span></div>
 			
             <div class="content">
-            	
-                
-                <form id="district_form" action="<?php echo base_url("questions_mtc/insert_question") ; ?>" method="post" enctype="multipart/form-data"  class="valid">
+            	<form id="district_form" action="<?php echo base_url("questions_mtc/insert_question") ; ?>" method="post" enctype="multipart/form-data"  class="valid">
                 
                 <div class="row">
 					<label for="question_title">Question Title</label>
@@ -35,31 +29,32 @@ $(function(){
                 
                 <div class="row">
 					<label for="question_scenario">Question Scenario</label>
-					<div class="right"><textarea id="question_scenario" name="question_scenario" rows="" cols="" class="wysiwyg" style="height : 100px;"></textarea></div>
+					<div class="right"><textarea id="question_scenario" name="question_scenario" rows="" cols="" class="tinymce" style="height : 100px;"></textarea></div>
 				</div>
                 
                 
                 <div class="row">
 					<label for="question_statement">Question Statement</label>
-					<div class="right"><textarea id="question_statement" name="question_statement" rows="" cols="" class="wysiwyg" style="height : 100px;"></textarea></div>
+					<div class="right"><textarea id="question_statement" name="question_statement" rows="" cols="" class="tinymce" style="height : 100px;"></textarea></div>
 				</div>
                 
                 <div class="row">
 					<label for="question_title">No. of Options in Column 1</label>
-					<div class="right"><input type="text" id="column_1_options" name="col1_options" value="<?php echo set_value('column_1_options') ; ?>" class="{validate:{required:true, min: 1, number: true, messages:{required:'Field is required'}}}" /></div>
+					<div class="right"><input type="text" id="column_1_options" name="column_1_options" value="<?php echo set_value('column_1_options') ; ?>" class="{validate:{required:true, min: 1, number: true, messages:{required:'Field is required'}}} no_of_options" column="1" /></div>
 					<br />
                 </div>
                 
                 <div class="row">
 					<label for="question_title">No. of Options in Column 2</label>
-					<div class="right"><input type="text" id="column_2_options" name="col2_options" value="<?php echo set_value('column_2_options') ; ?>" class="{validate:{required:true, min: 1, number: true, messages:{required:'Field is required'}}}" /></div>
+					<div class="right"><input type="text" id="column_2_options" name="column_2_options" value="<?php echo set_value('column_2_options') ; ?>" class="{validate:{required:true, min: 1, number: true, messages:{required:'Field is required'}}} no_of_options" column="2" /></div>
 					<br />
                 </div>
                 
                 <div id="column1_text_fields"></div>
                 <div id="column2_text_fields"></div>
                 
-                <div class="row"><div class="right"><button type="submit"><span>Add</span></button>&nbsp;&nbsp;<button type="button" class="back_button"><span>Back</span></button>&nbsp;&nbsp;<button type="button" class="cancel_button"><span>Cancel</span></button></div></div>
+                
+                <div class="row"><div class="right"><button type="submit"><span>Add</span></button>&nbsp;&nbsp;<button type="button" class="cancel_button"><span>Cancel</span></button></div></div>
 				
                 </form>
 			</div>
@@ -69,32 +64,47 @@ $(function(){
 
 <script type="application/javascript">
 $(function(){
-	$("#column_1_options").blur(function(){
+	$(".no_of_options").blur(function(){
 		
 		if(parseInt($(this).val()))
 		{
-			$("#column1_text_fields").html('<div class="row"><label for="col1_option_1">Column 1 option 1</label><div class="right"><input type="text" id="col1_option_1" name="col1_option_1" value="" class="{validate:{required:true, messages:{required:\'Field is required\'}}}" /></div><br /></div>') ;
-		
-			validator.refresh();
+			var no_of_fields = parseInt($(this).val()), column_no = $(this).attr("column"), html_data = "" ;
+			var data1 = "no_of_fields="+no_of_fields+"&column_no="+column_no ;
+			$.ajax
+			({
+				type:"POST",
+				async:false,
+				url:"<?php echo base_url() ; ?>questions_mtc/create_text_fields",
+				data:data1,
+				success:function(msg) { html_data = msg ; }
+			});
+			
+			if(html_data != "fail")
+			{
+				var var1 = "#column"+column_no+"_text_fields" ;
+				
+				if(no_of_fields == 0) 
+					$(var1).html("") ;
+				
+				$(var1).html(html_data) ;
+				validator.refresh();
+			}
+			else
+			{
+				var var1 = "#column"+column_no+"_text_fields" ;
+				$(var1).html("") ;
+				return false ;
+			}
 		}
 		else
 		{
+			var no_of_fields = parseInt($(this).val()), column_no = $(this).attr("column"), html_data = "" ;
+			
+			var var1 = "#column"+column_no+"_text_fields" ;
+			$(var1).html("") ;
 			return false ;
 		}
-	}) ;
-	
-	$("#column_2_options").blur(function(){
 		
-		if(parseInt($(this).val()))
-		{
-			$("#column2_text_fields").html('<div class="row"><label for="col2_option_1">Column 2 Option 1</label><div class="right"><input type="text" id="col2_option_1" name="col2_option_1" value="" class="{validate:{required:true, messages:{required:\'Field is required\'}}}" /></div><br /></div>') ;
-		
-			validator.refresh();	
-		}
-		else
-		{
-			return false ;
-		}
 	}) ;
 }) ;
 </script>

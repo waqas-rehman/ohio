@@ -355,10 +355,13 @@ class Questions extends CI_Controller
 		if($_POST)
 		{
 			$validation_parameter = array() ;
+			$answer_type = post_function("answer_type") ;
 			$question_rec = $this->model1->get_one(array("question_id" => decoded_string(post_function("question_id"), "&")), "questions") ;
-			
+			$data["answer_type"] = "" ;
+				
 			if($question_rec->answer_type == "single_answer") $validation_parameter["correct_answer"] = "Answer&required" ;
-			else $validation_parameter["correct_answer[]"] = "Answer&required" ;
+			elseif($question_rec->answer_type == "multiple_answer") $validation_parameter["correct_answer[]"] = "Answer&required" ;
+			elseif($question_rec->answer_type == "large_text_box" || $question_rec->answer_type == "small_text_box")  $validation_parameter["correct_answer"] = "Answer&required" ;
 			
 			if(form_validation_function($validation_parameter) == FALSE)
 			{
@@ -375,11 +378,19 @@ class Questions extends CI_Controller
 				{
 					$choosed_answer = post_function("correct_answer") ;
 					if($choosed_answer == $question_rec->correct_answer) $flag = true ;
+					$data["question_type"] = $question_rec->question_type ;
+					$data["answer_type"] = "single_answer" ;
 				}
-				else
+				elseif($question_rec->answer_type == "multiple_answer")
 				{
 					$choosed_answer = array_to_string($this->input->post("correct_answer"), "%&@") ;
 					if($choosed_answer == $question_rec->correct_answer) $flag = true ;
+					$data["answer_type"] = "multiple_answer" ;
+				}
+				elseif($question_rec->answer_type == "small_text_box" || $question_rec->answer_type == "large_text_box")
+				{
+					$data["answer_type"] = "text" ;
+					$data["text_answer"] = post_function("correct_answer") ;
 				}
 				
 				if($flag == true) $data["answer"] = true ;

@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" /> -->
+<link href="<?php echo base_url("css/smoothness/jquery-ui-1.10.0.custom.css") ; ?>" rel="stylesheet">
 
 
 <style type="text/css">
@@ -13,7 +14,7 @@
 
 <script type="application/javascript">
 	$(function() {
-		$( "#sortable1, #sortable2" ).sortable({
+		$( "#sortable1, #sortable2, #sortable3, #sortable4" ).sortable({
 			update: function( event, ui )
 			{
 				var col1 = $("#sortable1").sortable("toArray") ;
@@ -22,22 +23,21 @@
 				var num_col1 = parseInt(col1.length) ;
 				var num_col2 = parseInt(col2.length) ;
 				
+				var i = 0 ;
 				var temp1 = "" ;
-				for(var i = 1 ; i <= num_col1 ; i++)
-				{
-					temp1 = temp1+(parseInt($.inArray("col1_"+i, col1)) + 1)+"," ;
-				}
+				for(i = 1 ; i <= num_col1 ; i++)
+					temp1 = temp1+(parseInt($.inArray("col1corr_"+i, col1)) + 1)+"," ;
 				
 				var temp2 = "" ;
-				for(var i = 1 ; i <= num_col2 ; i++)
-				{
-					temp2 = temp2+(parseInt($.inArray("col2_"+i, col2)) + 1)+"," ;
-				}
+				for(i = 1 ; i <= num_col2 ; i++)
+					temp2 = temp2+($.inArray("col2corr_"+i, col2) + 1)+"," ;
+					
 				
-				alert("Temp1: "+temp1+" Temp2: "+temp2) ;
-				//alert(num_col1+" "+num_col2) ;
-				//temp1 = [] ;
-				//$.inArray("idToLookFor", col1);
+				temp1 = temp1.substr(0,(temp1.length - 1)) ;
+				temp2 = temp2.substr(0,(temp2.length - 1)) ;
+				
+				$("#col1_display_order").val(temp1) ;
+				$("#col2_display_order").val(temp2) ;
 				
 			}
 		}) ;
@@ -47,31 +47,58 @@
 <div id="right">
 	<div class="section">
 		<div class="box">
-			<div class="title">Fullsize box<span class="hide"></span></div>
-			<div class="content">    
-          	
+			<div class="title"><?php echo $question_rec->question_mtc_title ; ?><span class="hide"></span></div>
+			<div class="content">
+            	<?php if($question_rec->question_mtc_scenario) { ?><blockquote><div><?php echo $question_rec->question_mtc_scenario ; ?></div></blockquote><?php } ?>
+                <?php if($question_rec->question_mtc_statement) { ?><p><?php echo $question_rec->question_mtc_statement ; ?></p><br /><?php } ?>
             <div class="section">
 				<div class="box">
-					<div class="title">Fullsize box<span class="hide"></span></div>
+					<div class="title">Arrange the Columns in the right way(Correct Answer)<span class="hide"></span></div>
 					<div class="content">
                     	<div class="width100">
                             <div class="width50 float_left">
-                                <ul id="sortable1" class="width95">
-                                  <li id="col1_1" class="ui-state-default">Can be dropped..</li>
-                                  <li id="col1_2" class="ui-state-default">..on an empty list</li>
-                                  <li id="col1_3" class="ui-state-default">Item 3</li>
-                                  <li id="col1_4" class="ui-state-default">Item 4</li>
-                                  <li id="col1_5" class="ui-state-default">Item 5</li>
+                            	<ul id="sortable1" class="width95">
+                                	<?php
+										$col_texts = explode("%&@", $question_rec->question_mtc_text1) ;
+										$i = 1 ;
+										$col1 = array() ;
+										if($col_texts)
+										{
+											foreach($col_texts as $rec):
+												$col1[] = '<li id="col1corr_'.$i.'" class="ui-state-default">'.$rec.'</li>' ;
+                                	 			$i = $i + 1 ;
+											endforeach ;
+										}
+										
+										$order1 = explode(",", $question_rec->column1_display_order) ;
+										
+										foreach($order1 as $num):
+											echo $col1[$num - 1] ;
+										endforeach ;
+									?>
                                 </ul>
                             </div>
                             
                             <div class="width50 float_left">
                                 <ul id="sortable2" class="width95">
-                                  <li id="col2_1" class="ui-state-highlight">Cannot be dropped..</li>
-                                  <li id="col2_2" class="ui-state-highlight">..on an empty list</li>
-                                  <li id="col2_3" class="ui-state-highlight">Item 3</li>
-                                  <li id="col2_4" class="ui-state-highlight">Item 4</li>
-                                  <li id="col2_5" class="ui-state-highlight">Item 5</li>
+                                  <?php
+										$col_texts = explode("%&@", $question_rec->question_mtc_text2) ;
+										$i = 1 ;
+										$col2 = array() ;
+										if($col_texts)
+										{
+											foreach($col_texts as $rec):
+												$col2[] = '<li id="col2corr_'.$i.'" class="ui-state-highlight">'.$rec.'</li>' ;
+												$i = $i + 1 ;
+											endforeach ;
+										}
+										
+										$order2 = explode(",", $question_rec->column2_display_order) ;
+										
+										foreach($order2 as $num):
+											echo $col2[$num - 1] ;
+										endforeach ;
+									?>
                                 </ul>
                             </div>
                         </div>
@@ -81,15 +108,21 @@
 			</div>
             <div class="clear"></div>
             
-            <form id="" name="" method="post" action="<?php echo base_url("") ; ?>">
-            	<input type="hidden" id="" name="" value="<?php echo "" ; ?>" />
-                <input type="hidden" id="" name="" value="<?php echo "" ; ?>" />
-            	
+            <form id="" name="" method="post" action="<?php echo base_url("questions_mtc/submit_answer") ; ?>">
+            	<input type="hidden" id="question_id" name="question_id" value="<?php echo encoded_string($question_rec->question_mtc_id, "&", 10) ; ?>" />
+                
+                <input type="hidden" id="col1_display_order" name="col1_display_order" value="<?php echo $question_rec->column1_display_order ; ?>" />
+                <input type="hidden" id="col2_display_order" name="col2_display_order" value="<?php echo $question_rec->column2_display_order ; ?>" />
+                
                 <div class="row"></div>
-                <div class="row"><div class="right"><button type="submit"><span>Submit</span></button>&nbsp;&nbsp;<button type="submit"><span>Cancel</span></button></div></div>
-                <div class="row"></div>        
+                	<div class="row"><div class="right"><button type="submit"><span>Submit</span></button>&nbsp;&nbsp;<button id="cancel"><span>Close</span></button></div></div>
             </form>
             
             </div>
 		</div>
     </div>
+<script type="application/javascript">
+	$(function(){
+		$("#cancel").click(function(){ close() ; }) ;
+	}) ;
+</script>

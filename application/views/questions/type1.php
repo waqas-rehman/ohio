@@ -57,7 +57,7 @@ $(function(){
                 <form method="post" action="<?php echo base_url("questions/validate_answer") ; ?>">
 					
                     <input type="hidden" id="question_id" name="question_id" value="<?php echo encoded_string($question_rec->question_id, "&", 10) ; ?>" />
-                    
+                    <input type="hidden" id="answer_type" name="answer_type" value="<?php echo $question_rec->answer_type ; ?>" />
                     <?php if($question_rec->answer_type == "single_answer" || $question_rec->answer_type == "multiple_answer") { ?>
                     <div class="row">
                     	<div class="width100">
@@ -108,37 +108,6 @@ $(function(){
 							<div class="right"><button type="submit"><span>Submit</span></button>&nbsp;&nbsp;<button id="cancel_button" type="button"><span>Cancel</span></button></div>
 					</div>
                     
-                    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css" />
-               	<style>
-#sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
-#sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
-</style>
-<script>
-$(function() {
-$( "#sortable1, #sortable2" ).sortable().disableSelection();
-});
-</script>
-</head>
-<body>
-<ul id="sortable1" class="connectedSortable">
-<li class="ui-state-default">Item 1</li>
-<li class="ui-state-default">Item 2</li>
-<li class="ui-state-default">Item 3</li>
-<li class="ui-state-default">Item 4</li>
-<li class="ui-state-default">Item 5</li>
-</ul>
-<ul id="sortable2" class="connectedSortable">
-<li class="ui-state-highlight">Item 1</li>
-<li class="ui-state-highlight">Item 2</li>
-<li class="ui-state-highlight">Item 3</li>
-<li class="ui-state-highlight">Item 4</li>
-<li class="ui-state-highlight">Item 5</li>
-</ul>
-                
-                 
                 </form>
                 
             </div>

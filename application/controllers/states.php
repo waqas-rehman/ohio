@@ -12,7 +12,6 @@ class States extends CI_Controller
 	public function index($msg = 0)
 	{
 		$data["state_recs"] = $this->model1->get_all("states") ;
-		print_r($data["state_recs"]) ; exit ;
  		$data["view"] = "states/index" ;
 		$data["session_data"] = $this->session_data("", $msg) ;
 		$this->load->view("template/body", $data);
@@ -41,7 +40,7 @@ class States extends CI_Controller
 			}
 			else
 			{
-				$param1["state_name"] = post_function(array("state_name" => "state_name",
+				$param1 = post_function(array("state_name" => "state_name",
 															"state_code" => "state_code",
 															"state_status" => "state_status")) ;
 				

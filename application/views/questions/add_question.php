@@ -1,3 +1,4 @@
+<?php $this->load->view("text_editor/tiny_mce") ; ?>
 <script type="application/javascript">
 $(function(){
 	$(".back_button").click(function(){
@@ -44,7 +45,7 @@ $(function(){
                 <?php if($question_type == "type2" || $question_type == "type3" || $question_type == "type4" || $question_type == "type5") { ?>
                 <div class="row">
 					<label for="question_scenario">Question Scenario</label>
-					<div class="right"><textarea id="question_scenario" name="question_scenario" rows="" cols="" class="wysiwyg" style="height : 100px;"><?php echo set_value('question_scenario') ; ?></textarea></div>
+					<div class="right"><textarea id="question_scenario" name="question_scenario" rows="" cols=""  class="tinymce" style="height : 100px;"><?php echo set_value('question_scenario') ; ?></textarea></div>
 				</div>
                 <?php } ?>
                 
@@ -52,15 +53,15 @@ $(function(){
                 <div class="row">
 					<label for="question_scenario">Question Scenario</label>
 					<div class="right">
-                        <textarea id="question_scenario1" name="question_scenario1" rows="" cols="" class="wysiwyg" style="height : 100px;"><?php echo set_value('question_scenario1') ; ?></textarea>
-                        <textarea id="question_scenario2" name="question_scenario2" rows="" cols="" class="wysiwyg" style="height : 100px;"><?php echo set_value('question_scenario2') ; ?></textarea>
+                        <textarea id="question_scenario1" name="question_scenario1" rows="" cols=""  class="tinymce" style="height : 100px;"><?php echo set_value('question_scenario1') ; ?></textarea>
+                        <textarea id="question_scenario2" name="question_scenario2" rows="" cols=""  class="tinymce" style="height : 100px;"><?php echo set_value('question_scenario2') ; ?></textarea>
                     </div>           
 				</div>
                 <?php } ?>
                 
                 <div class="row">
 					<label for="question_statement">Question Statement</label>
-					<div class="right"><textarea id="question_statement" name="question_statement" rows="" cols="" class="wysiwyg" style="height : 100px;"><?php echo set_value('question_statement') ; ?></textarea></div>
+					<div class="right"><textarea id="question_statement" name="question_statement" rows="" cols=""  class="tinymce" style="height : 100px;"><?php echo set_value('question_statement') ; ?></textarea></div>
 				</div>
 				
                 <?php if($number_of_choices) {
