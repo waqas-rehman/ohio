@@ -108,7 +108,7 @@
 							</li>
                             <li <?php if($session_data["menu"] == "questions") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions") ; ?>">MCQs/Text Questions</a>
 								<ul>
-									<li <?php if($session_data["submenu"] == "add_question") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions/choose_question_type") ; ?>">Add MCQ/Text Question</a></li>
+									<li <?php if($session_data["submenu"] == "add_question") echo 'class="current"' ; ?>><a href="<?php echo base_url("questions/add_question") ; ?>">Add MCQ/Text Question</a></li>
 								</ul>
 							</li>
                             
