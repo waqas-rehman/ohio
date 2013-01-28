@@ -9,10 +9,11 @@ $(function(){
 
 function validate_form()
 {
+	 
 	var question_type = $("input:radio[name=question_type]:checked").val() ;
 	var no_of_choices = $("#number_of_choices").val() ;
 	var answer_type = $("input:radio[name=answer_type]:checked").val() ;
-	
+		
 	var question_statement = tinymce.get('question_statement').getContent() ; 
 	if(question_statement == "") { alert("Question Statment is required") ; return false ; }
 	
@@ -66,28 +67,34 @@ function perform_actions()
 		if($("div#question_scenario2_div").hasClass("hidden")) $("div#question_scenario2_div").toggleClass('hidden visible') ;
 	}
 	
-	if(question_type == "type3" || question_type == "type4" || question_type == "type5" || question_type == "type6")
-	{
-		if($("div#image_upload_div").hasClass("hidden")) $("div#image_upload_div").toggleClass('hidden visible') ;
-	} else {
-		if($("div#image_upload_div").hasClass("visible")) $("div#image_upload_div").toggleClass('visible hidden') ;
+	if(question_type == "type3" || question_type == "type4" || question_type == "type5" || question_type == "type6") {
+	
+		if($("div#image_upload_div").hasClass("hidden"))
+			$("div#image_upload_div").toggleClass('hidden visible') ;
+	} else { 
+		if($("div#image_upload_div").hasClass("visible"))
+			$("div#image_upload_div").toggleClass('visible hidden') ;
 	}
 	
 	if(isNaN(no_of_choices)) alert("Number of Choices must be a number") ;
 	else if(answer_type != "large_text_box" && answer_type != "small_text_box")
 	{
-		if(!(no_of_choices > 0 && no_of_choices < 7)) alert("Number of Choices should be between 1-6") ;	
+		if((no_of_choices <= 0 && no_of_choices >= 7)) alert("Number of Choices should be between 1-6") ;	
 		else
 		{
+			 
 			if($("div#text_fields").hasClass("hidden")) $("div#text_fields").toggleClass('hidden visible') ;
 			if($("div#radio_checkboxes").hasClass("hidden")) $("div#radio_checkboxes").toggleClass('hidden visible') ;
 			$("#radio_checkboxes").html("") ;
 			
 			var input_field_texts = "", total_fields = $("#hidden_total_text_fields").val() ;
 			
-			for(var i = 1 ; i <= no_of_choices ; i++)
-			{
-				if((i <= total_fields) && ($("#choice"+i).val() != "")) input_field_texts = input_field_texts + ($("#choice"+i).val())+ "@%#" ;
+			if(total_fields > 0) {
+				for(var i = 1 ; i <= total_fields ; i++) {
+					if((i <= total_fields) && ($("#choice"+i).val() != "")) {
+						input_field_texts = input_field_texts + ($("#choice"+i).val())+ "@%#" ;
+					}
+				}
 			}
 			
 			input_field_texts = input_field_texts.substr(0, input_field_texts.lastIndexOf("@%#")) ;

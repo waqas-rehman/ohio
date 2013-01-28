@@ -48,6 +48,10 @@
 				temp3 = temp3.substr(0,(temp3.length - 1)) ;
 				temp4 = temp4.substr(0,(temp4.length - 1)) ;
 				
+				temp1 = order_columns(temp1) ;
+				temp2 = order_columns(temp2) ;
+	
+				
 				$("#col1_answer_order").val(temp1) ;
 				$("#col2_answer_order").val(temp2) ;
 				
@@ -56,6 +60,25 @@
 			}
 		}) ;
 	});
+	
+	function order_columns(string)
+	{
+		array = new Array ;
+		array = string.split(',') ;
+		
+		var len = array.length ;
+		var temp1 = "" ;
+		var i = 0 ;
+ 		
+		for(i = 1 ; i <= len ; i++)
+		{
+			temp1 = temp1+(array.indexOf(i.toString()) + 1)+"," ;
+		}
+		
+		temp1 = temp1.substr(0,(temp1.length - 1)) ;
+		return temp1 ;
+	}
+	
 </script>
 
 <div id="right">
@@ -157,8 +180,7 @@
                 <input type="hidden" id="col2_display_order" name="col2_display_order" value="<?php echo $str2 ; ?>" />
             	
                 <div class="row"></div>
-                	<div class="row"><div class="right"><button type="submit"><span>Submit</span></button></div></div>
-                <div class="row"></div>
+                <div class="row"><div class="right"><button type="submit"><span>Submit</span></button></div></div>
                 <!--&nbsp;&nbsp;<button type="submit"><span>Cancel</span></button>-->
             </form>
             

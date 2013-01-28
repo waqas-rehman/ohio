@@ -20,7 +20,7 @@
     <div class="section">
 		
         <div class="box">
-					<div class="title">Questions<span class="hide"></span></div>
+					<div class="title">Match the Column Questions<span class="hide"></span></div>
 					<div class="content">
 						<table cellspacing="0" cellpadding="0" border="0" class="all"> 
 							<thead> 
@@ -51,7 +51,7 @@
 									<td align="center" valign="middle">
                                     	<a href="<?php echo base_url("questions_mtc/preview_question/".encoded_string($recs->question_mtc_id, "&", 10)) ; ?>" class="item small" target="_blank"><img title="Preview Question" src="<?php echo base_url("gfx/icons/small/file.png") ; ?>" alt="Question" /></a>&nbsp;&nbsp;
                                         <a href="<?php echo base_url("questions_mtc/edit_question/".encoded_string($recs->question_mtc_id, "&", 10)) ; /**/ ?>" class="item small"><img title="Edit Record" src="<?php echo base_url("gfx/icons/small/edit.png") ; /**/ ?>" alt="Edit" /></a>&nbsp;&nbsp;
-                                    	<a href="<?php echo base_url("questions/remove_question/".encoded_string($recs->question_mtc_id, "&", 10)) ; ?>" class="item small" onclick="return confirm('Are you sure to remove this record?')"><img title="Remove Record" src="<?php echo base_url("gfx/icons/big/trash.png") ; ?>" alt="Cancel" /></a>
+                                    	<a href="<?php echo base_url("questions_mtc/remove_question/".encoded_string($recs->question_mtc_id, "&", 10)) ; ?>" class="item small" onclick="return confirm('Are you sure to remove this record?')"><img title="Remove Record" src="<?php echo base_url("gfx/icons/big/trash.png") ; ?>" alt="Cancel" /></a>
                                     </td>
 								</tr>
                                 <?php endforeach ; ?>

@@ -148,11 +148,10 @@ $(function(){ $(".cancel_button").click(function(){ window.location.href = "<?ph
 					</div>
 				<?php } ?>
                 
-				
 				<?php if($question_rec->answer_type == "single_answer" || $question_rec->answer_type == "multiple_answer") { ?>
                 <?php $choices = string_to_array($question_rec->choices_text, "%&@") ; ?>
                 	<input type="hidden" id="hidden_total_text_fields" name="hidden_total_text_fields" value="<?php echo $question_rec->number_of_choices ; ?>" />
-                	<div id="text_fields" class="visible">
+                    <div id="text_fields" class="visible">
 					<?php if($choices) { $i = 1 ; foreach($choices as $rec): ?>
                     	<div class="row">
                     		<label for="choice<?=$i?>">Choice <?=$i?> Text</label>
@@ -160,8 +159,10 @@ $(function(){ $(".cancel_button").click(function(){ window.location.href = "<?ph
                 		</div>
                 <?php $i = $i + 1 ; endforeach ; } ?>
                 	</div>
+				<?php } else { ?>
+					<input type="hidden" id="hidden_total_text_fields" name="hidden_total_text_fields" value="0" />
+                    <div id="text_fields" class="visible"></div>
 				<?php } ?>
-				
                 
                 <?php if($question_rec->answer_type == "single_answer" || $question_rec->answer_type == "multiple_answer") { ?>
                 
@@ -193,6 +194,8 @@ $(function(){ $(".cancel_button").click(function(){ window.location.href = "<?ph
 						?>
                 	</div>
                 </div>
+                <?php } else { ?>
+                	<div id="radio_checkboxes" class="visible"></div>
                 <?php } ?>
                 
                 <?php if($question_rec->question_image == "") { ?>

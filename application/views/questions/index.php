@@ -20,7 +20,7 @@
     <div class="section">
 		
         <div class="box">
-					<div class="title">Questions<span class="hide"></span></div>
+					<div class="title">Multiple Choice and Text Boxes Questions<span class="hide"></span></div>
 					<div class="content">
 						<table cellspacing="0" cellpadding="0" border="0" class="all"> 
 							<thead> 

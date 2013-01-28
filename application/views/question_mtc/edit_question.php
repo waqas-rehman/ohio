@@ -20,7 +20,7 @@ $(function(){
         	<div class="title">Add Question<span class="hide"></span></div>
 			
             <div class="content">
-            	<form id="district_form" action="<?php echo base_url("questions_mtc/insert_question") ; ?>" method="post" enctype="multipart/form-data"  class="valid">
+            	<form id="district_form" action="<?php echo base_url("questions_mtc/update_question") ; ?>" method="post" enctype="multipart/form-data"  class="valid">
                 <input type="hidden" id="question_id" name="question_id" value="<?php echo encoded_string($question_rec->question_mtc_id, "&", 10) ; ?>" />
                 <div class="row">
 					<label for="question_title">Question Title</label>
@@ -86,7 +86,7 @@ $(function(){
 				?>
                 </div>
                 
-                <div class="row"><div class="right"><button type="submit"><span>Add</span></button>&nbsp;&nbsp;<button type="button" class="cancel_button"><span>Cancel</span></button></div></div>
+                <div class="row"><div class="right"><button type="submit"><span>Update</span></button>&nbsp;&nbsp;<button type="button" class="cancel_button"><span>Cancel</span></button></div></div>
 				
                 </form>
 			</div>

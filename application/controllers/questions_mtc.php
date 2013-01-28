@@ -58,9 +58,7 @@ class Questions_mtc extends CI_Controller
 				redirect(base_url("questions_mtc/question_options/".encoded_string($rec_id, "&", 10))) ;
 			}
 			else
-			{
-				redirect(base_url("questions_mtc/index/6")) ;	
-			}
+				redirect(base_url("questions_mtc/index/6")) ;
 		}
 		else
 			redirect(base_url("questions_mtc")) ;
@@ -71,7 +69,7 @@ class Questions_mtc extends CI_Controller
 		if($encoded_question_id)
 		{
 			$data["question_rec"] = $this->model1->get_one(array("question_mtc_id" => decoded_string($encoded_question_id, "&")), "questions_mtc") ;
-		
+			
 			$data["view"] = "question_mtc/question_options" ;
 			$data["session_data"] = $this->session_data("", $msg) ;
 			$this->load->view("template/body", $data) ;
@@ -121,20 +119,19 @@ class Questions_mtc extends CI_Controller
 			$question_id = decoded_string(post_function("question_id") , "&") ;
 			$question_rec = $this->model1->get_one(array("question_mtc_id" => $question_id) , "questions_mtc") ;
 			
-			$given_answer = $this->answer_array(post_function("col1_display_order"), post_function("col2_display_order")) ;
-	 		$correct_answer = $this->answer_array($question_rec->column1_answer_order, $question_rec->column2_answer_order) ;
+			$this->answer_array(post_function("col1_display_order"), post_function("col2_display_order")) ;
 			
-			$flag = true ;
+			list($possible_col1, $possible_col2) = $this->answer_array(post_function("col1_display_order"),post_function("col2_display_order")) ;
+			list($answer_col1, $answer_col2) = $this->answer_array($question_rec->column1_answer_order, $question_rec->column2_answer_order) ;
 			
-			foreach($given_answer as $col1 => $col2):
-				$temp = $correct_answer[$col1] ;
-				if($temp != $col2) $flag = false ;
-			endforeach ;
+			$flag = "1" ;
+			
+			$flag = $this->validate_answer($possible_col1, $possible_col2, $answer_col1, $answer_col2) ;
 			
 			$data["view"] = "question_mtc/question_response" ;
 			
-			if($flag) $data["session_data"] = $this->session_data("", "1") ;
-			else $data["session_data"] = $this->session_data("", "2") ;
+			if($flag == "1") $data["session_data"] = $this->session_data("", "1") ;
+			elseif($flag == "0") $data["session_data"] = $this->session_data("", "2") ;
 			
 			$this->load->view("template/body", $data) ;
 		}
@@ -142,38 +139,63 @@ class Questions_mtc extends CI_Controller
 			redirect(base_url("questions_mtc"));
 	}
 	
+	private function validate_answer($possible_col1, $possible_col2, $answer_col1, $answer_col2)
+	{
+		$max_size = max(sizeof($possible_col1), sizeof($possible_col2)) ;
+		//echo $max_size."<br/>" ;
+		
+		$flag1 = "1" ;
+		
+		for($i = 0 ; $i < $max_size ; $i++)
+		{
+			$val1 = $possible_col1[$i] ;
+			$val2 = $possible_col2[$i] ;
+			//echo "val1 ".$i.": ".$val1." val2 ".$i.": ".$val2."<br />" ;
+			
+			$key1 = array_search($val1, $answer_col1) ;
+			$key2 = array_search($val2, $answer_col2) ;
+			//echo "key1: ".$key1." key2: ".$key2."<br />" ;
+			
+			if($key1 != $key2) {$flag1 = "0" ; break ;}
+		}
+		if($flag1 == "1") return "1" ;
+		elseif($flag1 == "0") return "0" ;
+	}
+	
 	private function answer_array($col1, $col2)
 	{
 		$temp1 = explode(",", $col1) ;
-		$temp2 = sizeof($temp1) ;
+		$size1 = sizeof($temp1) ;
 			
-		$temp3 = explode(",", $col2) ;
-		$temp4 = sizeof($temp3) ;
+		$temp2 = explode(",", $col2) ;
+		$size2 = sizeof($temp2) ;
 			
 		$size = 0 ;
-			
-		$flag = -1 ;
-		if($temp2 == $temp4) { $size = $temp2 ; $flag = 1 ; }
-		elseif($temp2 > $temp4) { $size = $temp2 ; $flag = 1 ; }
-		elseif($temp2 < $temp4) { $size = $temp4 ; $flag = 2 ; }
- 			
-		$selected_order = array() ;
-			
+		$flag = 1 ;
+		
+		if(($size1 == $size2) || ($size1 > $size2)) $size = $size1 ;
+		elseif($size1 < $size2) { $size = $size2 ; $flag = 2 ; }
+		
+		$array1 = array() ;
+		$array2 = array() ;
+		
 		for($i = 0 ; $i < $size ; $i++)
 		{
 			if($flag == 1)
 			{
-				if(isset($temp3[$i])) $selected_order[$temp1[$i]] = $temp3[$i] ; 
-				else $selected_order[$temp1[$i]] = "no_val" ;
+				$array1[] = $temp1[$i] ;
+				if($i >= $size2 ) $array2[] = "no_val" ;
+				else $array2[] = $temp2[$i] ;
 			}
 			elseif($flag == 2)
 			{
-				if(isset($temp1[$i])) $selected_order[$temp1[$i]] = $temp3[$i] ; 
-				else $selected_order["no_val".$i] = $temp3[$i] ;
+				$array2[] = $temp2[$i] ;
+				if($i >= $size1 ) $array1[] = "no_val" ;
+				else $array1[] = $temp1[$i] ;
 			}
 		}
 		
-		return $selected_order ;
+		return array($array1, $array2) ;
 	}
 	
 	public function edit_question($encoded_question_id, $msg = 0)
@@ -223,15 +245,8 @@ class Questions_mtc extends CI_Controller
 			
 			$res = $this->model1->update_rec($param, $cond1, "questions_mtc") ; //insert_rec($param, "questions_mtc") ;
 			
-			if($rec_id)
-			{
-				$data["question_rec"] = $this->model1->get_one(array("question_mtc_id" => $rec_id), "questions_mtc") ;
-				redirect(base_url("questions_mtc/question_options/".encoded_string($rec_id, "&", 10))) ;
-			}
-			else
-			{
-				redirect(base_url("questions_mtc/index/6")) ;	
-			}
+			if($res) redirect(base_url("questions_mtc/question_options/".encoded_string($cond1["question_mtc_id"], "&", 10))) ;
+			else redirect(base_url("questions_mtc/index/6")) ;
 		}
 		else
 			redirect(base_url("questions_mtc")) ;
@@ -322,4 +337,18 @@ class Questions_mtc extends CI_Controller
 		exit ;
 	}
 	
+	public function remove_question($encoded_question_id)
+	{
+		if($encoded_question_id)
+		{
+			$cond1["question_mtc_id"] = decoded_string($encoded_question_id, "&") ;
+			
+			$res1 = $this->model1->delete_rec($cond1, "questions_mtc") ;
+			
+			if($res1) redirect(base_url("questions_mtc/index/3")) ;
+			else redirect(base_url("questions_mtc/index/4")) ;
+		
+		} else
+			redirect(base_url("questions_mtc")) ;
+	}
 }

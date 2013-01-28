@@ -31,10 +31,12 @@
 				var temp2 = "" ;
 				for(i = 1 ; i <= num_col2 ; i++)
 					temp2 = temp2+($.inArray("col2corr_"+i, col2) + 1)+"," ;
-					
 				
 				temp1 = temp1.substr(0,(temp1.length - 1)) ;
 				temp2 = temp2.substr(0,(temp2.length - 1)) ;
+				
+				temp1 = order_columns(temp1) ;
+				temp2 = order_columns(temp2) ;
 				
 				$("#col1_display_order").val(temp1) ;
 				$("#col2_display_order").val(temp2) ;
@@ -42,6 +44,24 @@
 			}
 		}) ;
 	});
+	
+	function order_columns(string)
+	{
+		array = new Array ;
+		array = string.split(',') ;
+		
+		var len = array.length ;
+		var temp1 = "" ;
+		var i = 0 ;
+ 		
+		for(i = 1 ; i <= len ; i++)
+		{
+			temp1 = temp1+(array.indexOf(i.toString()) + 1)+"," ;
+		}
+		
+		temp1 = temp1.substr(0,(temp1.length - 1)) ;
+		return temp1 ;
+	}
 </script>
 
 <div id="right">
